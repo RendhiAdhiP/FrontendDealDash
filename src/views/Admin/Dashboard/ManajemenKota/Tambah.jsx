@@ -59,7 +59,7 @@ export default function TambahKota() {
         <DashboardLayout>
 
             {message && (
-                <div className="flex-flex-col z-10 absolute top-10 right-10 bg-green-500 p-4 w-64 rounded-lg">
+                <div className="flex-flex-col z-10 fixed top-10 right-10 bg-green-500 p-4 w-max rounded-lg">
                     <p className='text-white'>{message}</p>
                 </div>
             )}

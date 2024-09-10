@@ -70,7 +70,7 @@ export default function Index() {
         <main className=" w-screen h-screen flex justify-center items-center " style={{ backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(${background})`, backgroundSize: 'cover',  }} >
 
             {message && (
-                <div className="flex-flex-col z-10 absolute top-10 right-10 bg-red-500 p-4 w-64 rounded-lg">
+                <div className="flex-flex-col z-10 fixed top-10 right-10 bg-red-500 p-4 w-max rounded-lg">
                     <p className='text-white'>{message}</p>
                 </div>
             )}

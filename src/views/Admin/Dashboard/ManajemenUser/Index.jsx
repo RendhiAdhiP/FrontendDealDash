@@ -18,13 +18,15 @@ export default function ManajemenUser() {
         if (logged.token) {
             axios.delete(`http://localhost:8000/api/v1/manajemen-user/hapus/${id}`, {
                 headers: {
-                    Authorization: `Bearer ${logged.token}`
+                    Authorization: `Bearer ${logged.token}`,
+                    "Access-Control-Allow-Origin": "*",
+                    "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS"
                 }
             }).then((res) => {
                 setMessage(res.data.message)
                 setTimeout(() => {
                     setMessage(null)
-                },2000)
+                }, 2000)
             })
                 .catch((err) => {
                     console.error(err.response)
@@ -63,7 +65,7 @@ export default function ManajemenUser() {
         <DashboardLayout>
 
             {message && (
-                <div className="flex-flex-col z-10 absolute top-10 right-10 bg-green-500 p-4 w-64 rounded-lg">
+                <div className="flex-flex-col z-10 fixed top-10 right-10 bg-green-500 p-4 w-max rounded-lg">
                     <p className='text-white'>{message}</p>
                 </div>
             )}
@@ -82,7 +84,7 @@ export default function ManajemenUser() {
                 </Link>
 
                 <div className="flex flex-col overflow-x-auto shadow-md sm:rounded-lg gap-4">
-                    <Table title={['No', 'Nama', 'Email', 'Kota Asal', 'Action']} row={['nama', 'email', 'asal_kota']} datas={users} links={{detail:'/admin/dashboard/manajemen-user/user/',edit:'/admin/dashboard/manajemen-user/user-edit/'}} emitDelete={handleDelete} />
+                    <Table title={['No', 'Nama', 'Email', 'Kota Asal', 'Action']} row={['nama', 'email', 'asal_kota']} datas={users} links={{ detail: '/admin/dashboard/manajemen-user/user/', edit: '/admin/dashboard/manajemen-user/user-edit/' }} emitDelete={handleDelete} />
                 </div>
             </section>
 

@@ -13,7 +13,7 @@ export default function editUser() {
         foto: '',
         file: null,
         email: '',
-        password: null,
+        password: '',
         tanggalLahir: '',
         kotaAsal: [],
     });
@@ -58,7 +58,7 @@ export default function editUser() {
         }
         formData.append('name', users.nama)
         formData.append('email', users.email)
-        if (users.password !== null) {
+        if (users.password) {
             formData.append('password', users.password)
         }
         formData.append('tanggal_lahir', users.tanggalLahir)
@@ -67,6 +67,8 @@ export default function editUser() {
         } else {
             formData.append('kota_asal', users.kotaAsal)
         }
+
+        console.log(formData.get('password'))
 
 
         if (logged.token) {
@@ -116,6 +118,7 @@ export default function editUser() {
                         kotaAsal: userData.kota_asal || '',
                     });
 
+                    console.log(response)
                     console.log(userData);
                 })
                 .catch((err) => {
@@ -147,7 +150,7 @@ export default function editUser() {
         <DashboardLayout>
 
             {message && (
-                <div className="flex-flex-col z-10 absolute top-10 right-10 bg-green-500 p-4 w-64 rounded-lg">
+                <div className="flex-flex-col z-10 fixed top-10 right-10 bg-green-500 p-4 w-max rounded-lg">
                     <p className='text-white'>{message}</p>
                 </div>
             )}

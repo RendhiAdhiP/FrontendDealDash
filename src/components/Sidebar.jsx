@@ -46,10 +46,10 @@ export default function Sidebar() {
         <aside className="flex flex-col h-screen w-max fixed z-10">
 
             {message && (
-                <div className="flex-flex-col z-10 absolute top-10 -right-[470%] bg-green-500 p-4 w-64 rounded-lg">
+                <div className="flex-flex-col z-10 fixed top-10 right-10 bg-green-500 p-4 w-max rounded-lg">
                     <p className='text-white'>{message}</p>
                 </div>
-            )}
+            )} 
 
 
             <header className="h-32 flex justify-center items-center">
