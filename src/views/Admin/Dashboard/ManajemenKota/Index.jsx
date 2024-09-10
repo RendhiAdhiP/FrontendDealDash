@@ -67,7 +67,7 @@ export default function ManajemenKota() {
             )}
 
             <section>
-                <h3 className="text-2xl text-balck font-medium">Manajemen User</h3>
+                <h3 className="text-2xl text-balck font-medium">Manajemen Kota</h3>
             </section>
 
             <section className="flex flex-col gap-5">

@@ -23,10 +23,7 @@ export default function Detail() {
                 }
             })
                 .then((res) => {
-                    console.log(res.data)
                     setDetailUser(res.data.user)
-                    console.log(detailUser)
-
                 })
                 .catch((err) => {
                     console.error(err.response)
@@ -45,7 +42,6 @@ export default function Detail() {
                 }
             }).then((res) => {
                 setMessage(res.data.message)
-                console.log(res.data.message)
                 setTimeout(() => {
                     setMessage(null)
                     navigate('/admin/dashboard/manajemen-user')

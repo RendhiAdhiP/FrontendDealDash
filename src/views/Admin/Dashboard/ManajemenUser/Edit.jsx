@@ -85,7 +85,6 @@ export default function editUser() {
                     }, 2000)
                 })
                 .catch((err) => {
-                    console.error(err.response.data)
                     setErrors(err.response.data.errors)
 
                 })

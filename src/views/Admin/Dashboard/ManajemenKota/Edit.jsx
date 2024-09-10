@@ -38,7 +38,6 @@ export default function EditKota() {
                     }, 2000)
                 })
                 .catch((err) => {
-                    console.error(err)
                     setErrors(err.response.data.errors)
 
                 })
@@ -61,10 +60,7 @@ export default function EditKota() {
                 }
             })
                 .then((res) => {
-
                     setKota(res.data.kota.kota);
-                    // setKota();
-
                 })
                 .catch((err) => {
                     console.error(err.response);
