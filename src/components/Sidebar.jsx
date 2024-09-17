@@ -1,42 +1,36 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Loader } from "./loader";
+import { useLogout } from "../features/Auth/useLogout";
 
 
 
 export default function Sidebar() {
+
     const [message, setMessage] = useState(null)
     const navigate = useNavigate()
     const location = useLocation();
+    const [logoutIsLoading, setLogoutIsLoading] = useState(false);
 
+    const { mutate: logout } = useLogout({
+        onSuccess: (res) => {
+            setLogoutIsLoading(false)
+            setMessage(res?.data.message)
+            console.log(res)
 
-    const handleLogout = () => {
-        const token = JSON.parse(localStorage.getItem('user')).token;
-
-        if (token) {
-            axios.post('http://localhost:8000/api/v1/auth/logout', {}, {
-                headers: {
-                    Authorization: `Bearer ${token}`
-                }
-            })
-                .then((res) => {
-                    // console.log(res)
-                    setMessage(res.data.message)
-
-                    setTimeout(() => {
-                        setMessage(null)
-                        navigate('/')
-                        localStorage.removeItem('user');
-                    }, 2000)
-
-
-                })
-                .catch((err) => {
-                    console.error(err.response.data.message)
-                })
+            setTimeout(() => {
+                setMessage(null)
+                navigate('/')
+                localStorage.removeItem('user');
+            }, 2000)
+        },
+        onError: (err) => {
+            setLogoutIsLoading(false)
+            console.error(err)
+            console.error(err?.response.data.message)
         }
+    })
 
-    }
 
     useEffect(() => {
         console.log(location.pathname)
@@ -80,8 +74,13 @@ export default function Sidebar() {
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path className="rouded-full fill-white/60 " d="M4 18H6V20H18V4H6V6H4V3C4 2.44772 4.44772 2 5 2H19C19.5523 2 20 2.44772 20 3V21C20 21.5523 19.5523 22 19 22H5C4.44772 22 4 21.5523 4 21V18ZM6 11H13V13H6V16L1 12L6 8V11Z" fill="black" />
                         </svg>
-                        <Link onClick={handleLogout} on className="text-white/60 font-medium text-sm">Logout</Link>
+                        <Link onClick={()=> {
+                            setLogoutIsLoading(true)
+                            logout()
+                         }} className="text-white/60 font-medium text-sm">Logout</Link>
                     </li>
+
+                    {logoutIsLoading && <Loader/>}
 
                 </ul>
             </nav>

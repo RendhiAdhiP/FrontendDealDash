@@ -1,87 +1,83 @@
 import { useEffect, useState } from "react";
-import DashboardLayout from "../../../../layouts/DashboardLayout";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import isLogged from "../../../../lib/isLogged";
+import { useFormik } from "formik";
+import { useMutation } from "@tanstack/react-query";
+import { axiosInstance } from "../../../../lib/axios";
+import LoadingButton from "../../../../components/LoadingButton";
+import Button from "../../../../components/Button";
 
 
 export default function TambahUser() {
 
-    const [users, setUsers] = useState({
-        nama: '',
-        foto: '',
-        file: null,
-        email: '',
-        password: '',
-        tanggalLahir: '',
-        kotaAsal: '',
-    });
+    const [previewFoto, setPreviewFoto] = useState(null);
 
     const [kotas, setKotas] = useState(null)
     const [errors, setErrors] = useState(null)
     const [message, setMessage] = useState(null)
-
+    const [isLoading, setIsLoading] = useState(false)
     const logged = isLogged();
     const navigate = useNavigate();
 
 
-    const handleChange = (e) => {
-        const { name, value, files } = e.target;
-        if (name === 'foto' && files) {
-            const file = files[0];
-            const imageUrl = URL.createObjectURL(file);
-            setUsers({
-                ...users,
-                foto: imageUrl,
-                file: file,
-            });
-        } else {
-            setUsers({
-                ...users,
-                [name]: value,
-            });
+    const { mutate: createUser } = useMutation({
+        mutationFn: async (data) => {
+            const formData = new FormData();
+
+            formData.append('name', data.nama)
+            formData.append('email', data.email)
+            formData.append('password', data.password)
+            formData.append('tanggal_lahir', data.tanggalLahir)
+            formData.append('kota_asal', data.kotaAsal)
+            if (data.fileFoto) {
+                formData.append('foto', data.fileFoto)
+
+            }
+
+            const createUserResponse = await axiosInstance.post('manajemen-user/tambah', formData)
+
+            return createUserResponse
+        },
+        onError: (err) => {
+            setIsLoading(false)
+            setErrors(err?.response?.data?.errors)
+            console.log(err.response)
+        },
+        onSuccess: (res) => {
+            setIsLoading(false)
+            setErrors(null)
+            setMessage(res.data.message)
+            setTimeout(() => {
+                setMessage(null)
+                navigate('/admin/dashboard/manajemen-user')
+            }, 2000)
         }
-    };
-
-    const handleSubmit = (e) => {
-        e.preventDefault()
-
-        console.log(users)
-
-        const formData = new FormData();
-        formData.append('name', users.nama)
-        formData.append('email', users.email)
-        formData.append('password', users.password)
-        formData.append('tanggal_lahir', users.tanggalLahir)
-        formData.append('kota_asal', users.kotaAsal)
-        if (users.file) {
-            formData.append('foto', users.file)
-        }
+    })
 
 
-        if (logged.token) {
-            axios.post('http://localhost:8000/api/v1/manajemen-user/tambah', formData, {
-                headers: {
-                    Authorization: `Bearer ${logged.token}`,
-                }
+    const formik = useFormik({
+        initialValues: {
+            nama: '',
+            email: '',
+            password: '',
+            tanggalLahir: '',
+            kotaAsal: '',
+            fileFoto: null
+        },
+        onSubmit: () => {
+            setIsLoading(true)
+            const { nama, email, password, tanggalLahir, kotaAsal, fileFoto } = formik.values
+            createUser({
+                nama,
+                email,
+                password,
+                tanggalLahir,
+                kotaAsal,
+                fileFoto
             })
-                .then((res) => {
-                    setMessage(res.data.message)
-                    setTimeout(() => {
-                        setMessage(null)
-                        navigate('/admin/dashboard/manajemen-user')
-                    }, 2000)
-                })
-                .catch((err) => {
-                    console.error(err.response.data.errors)
-                    setErrors(err.response.data.errors ? err.response.data.errors : null)
-                    console.log(err.response)
-
-                })
         }
-
-    }
-
+    })
 
     useEffect(() => {
 
@@ -97,7 +93,7 @@ export default function TambahUser() {
                 }
             })
                 .then((res) => {
-                    setKotas(res.data.kota)
+                    setKotas(res.data.data)
                 })
                 .catch((err) => {
                     console.error(err.response.data.errors)
@@ -106,7 +102,7 @@ export default function TambahUser() {
     }, [])
 
     return (
-        <DashboardLayout>
+        <>
 
             {message && (
                 <div className="flex-flex-col z-10 fixed top-10 right-10 bg-green-500 p-4 w-max rounded-lg">
@@ -126,7 +122,7 @@ export default function TambahUser() {
             </section>
 
             <section className="w-[400px] shadow-md sm:rounded-lg px-5 py-4">
-                <form onSubmit={handleSubmit} className="flex flex-col gap-8">
+                <form onSubmit={formik.handleSubmit} className="flex flex-col gap-8">
                     <div className="flex flex-col gap-5">
                         <div className="flex flex-col gap-2">
                             <label htmlFor="nama" className="font-medium text-base">Nama</label>
@@ -135,8 +131,8 @@ export default function TambahUser() {
                                 type="text"
                                 name="nama"
                                 placeholder="Masukkan Nama"
-                                value={users.nama}
-                                onChange={handleChange}
+                                value={formik.values.nama}
+                                onChange={formik.handleChange}
                             />
                             {errors && (
                                 <p className='text-xs text-red-400'>{errors?.name}</p>
@@ -145,14 +141,19 @@ export default function TambahUser() {
 
                         <div className="flex flex-col gap-2">
                             <div className="h-24 w-24  ">
-                                <img className="h-full w-full rounded-full object-cover object-center" src={users.foto ? users.foto : 'https://cdn-icons-png.flaticon.com/512/149/149071.png'} alt="" />
+                                <img className="h-full w-full rounded-full object-cover object-center" src={previewFoto ? previewFoto : 'https://cdn-icons-png.flaticon.com/512/149/149071.png'} alt="" />
                             </div>
                             <label htmlFor="foto" className="font-medium text-base">Foto</label>
                             <input
                                 className="text-xs"
                                 type="file"
                                 name="foto"
-                                onChange={handleChange}
+                                onChange={(e) => {
+                                    const file = e.target.files[0]
+                                    const imageUrl = URL.createObjectURL(file)
+                                    formik.setFieldValue('fileFoto', file)
+                                    setPreviewFoto(imageUrl)
+                                }}
                             />
 
                         </div>
@@ -164,8 +165,8 @@ export default function TambahUser() {
                                 type="email"
                                 name="email"
                                 placeholder="Masukkan Email"
-                                value={users.email}
-                                onChange={handleChange}
+                                value={formik.values.email}
+                                onChange={formik.handleChange}
                             />
                             {errors && (
                                 <p className='text-xs text-red-400'>{errors?.email}</p>
@@ -179,8 +180,8 @@ export default function TambahUser() {
                                 type="password"
                                 name="password"
                                 placeholder="Masukkan Password"
-                                value={users.password}
-                                onChange={handleChange}
+                                value={formik.values.password}
+                                onChange={formik.handleChange}
                             />
                             {errors && (
                                 <p className='text-xs text-red-400'>{errors?.password}</p>
@@ -193,8 +194,8 @@ export default function TambahUser() {
                                 className="text-xs bg-slate-100 border px-3 py-2 text-black rounded-md"
                                 type="date"
                                 name="tanggalLahir"
-                                value={users.tanggalLahir}
-                                onChange={handleChange}
+                                value={formik.values.tanggalLahir}
+                                onChange={formik.handleChange}
                             />
                             {errors && (
                                 <p className='text-xs text-red-400'>{errors?.tanggal_lahir}</p>
@@ -205,8 +206,8 @@ export default function TambahUser() {
                             <label htmlFor="kotaAsal" className="font-medium text-base">Kota Asal</label>
                             <select
                                 name="kotaAsal"
-                                value={users.kotaAsal}
-                                onChange={handleChange}
+                                value={formik.values.kotaAsal}
+                                onChange={formik.handleChange}
                                 className="text-xs bg-slate-100 border px-3 py-2 text-black rounded-md"
                             >
                                 <option className="text-xs" value="">Pilih Kota</option>
@@ -221,10 +222,11 @@ export default function TambahUser() {
                             )}
                         </div>
                     </div>
+                    {isLoading ? <LoadingButton className='bg-primary text-white' classCustomLoader={'border-white'} >Kirim</LoadingButton> : <Button className='bg-primary text-white' >Kirim</Button> }
 
-                    <button type="submit" className="bg-primary text-white px-5 py-2 rounded-lg">Submit</button>
+
                 </form>
             </section>
-        </DashboardLayout>
+        </>
     )
 }
