@@ -10,6 +10,11 @@ import EditUser from '../views/Admin/Dashboard/ManajemenUser/Edit.jsx';
 import ManajemenKota from '../views/Admin/Dashboard/ManajemenKota/Index.jsx';
 import EditKota from '../views/Admin/Dashboard/ManajemenKota/Edit.jsx';
 import TambahKota from '../views/Admin/Dashboard/ManajemenKota/Tambah.jsx';
+import ManajemenProduk from '../views/Admin/Dashboard/ManajemenProduk/Index.jsx';
+import TambahProduk from '../views/Admin/Dashboard/ManajemenProduk/TambahProduk.jsx';
+import HistoryProduks from '../views/Admin/Dashboard/ManajemenProduk/HistoryProduks.jsx';
+import EditProduk from '../views/Admin/Dashboard/ManajemenProduk/EditProduk.jsx';
+import TambahStok from '../views/Admin/Dashboard/ManajemenProduk/TambahStok.jsx';
 
 const AppRoutes = () => {
     return (
@@ -26,6 +31,13 @@ const AppRoutes = () => {
                 <Route path='manajemen-kota' element={<ManajemenKota />} />
                 <Route path='manajemen-kota/tambah-kota' element={<TambahKota />} />
                 <Route path='manajemen-kota/kota-edit/:id' element={<EditKota />} />
+
+                <Route path='manajemen-produk' element={<ManajemenProduk/>} />
+                <Route path='manajemen-produk/tambah' element={<TambahProduk/>} />
+                <Route path='manajemen-produk/edit/:id' element={<EditProduk/>} />
+                <Route path='manajemen-produk/history' element={<HistoryProduks/>} />
+                <Route path='manajemen-produk/tambah-stok' element={<TambahStok/>} />
+
             </Route>
 
             <Route path='*' element='Not Found 404' />

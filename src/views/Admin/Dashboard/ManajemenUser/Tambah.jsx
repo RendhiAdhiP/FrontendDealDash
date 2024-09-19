@@ -7,13 +7,14 @@ import { useMutation } from "@tanstack/react-query";
 import { axiosInstance } from "../../../../lib/axios";
 import LoadingButton from "../../../../components/LoadingButton";
 import Button from "../../../../components/Button";
+import { useCreateUser } from "../../../../features/ManajemenUser/useCreateUser";
+import { useKotas } from "../../../../features/ManajemenKota/useKotas";
 
 
 export default function TambahUser() {
 
     const [previewFoto, setPreviewFoto] = useState(null);
 
-    const [kotas, setKotas] = useState(null)
     const [errors, setErrors] = useState(null)
     const [message, setMessage] = useState(null)
     const [isLoading, setIsLoading] = useState(false)
@@ -21,24 +22,8 @@ export default function TambahUser() {
     const navigate = useNavigate();
 
 
-    const { mutate: createUser } = useMutation({
-        mutationFn: async (data) => {
-            const formData = new FormData();
+    const { mutate: createUser } = useCreateUser({
 
-            formData.append('name', data.nama)
-            formData.append('email', data.email)
-            formData.append('password', data.password)
-            formData.append('tanggal_lahir', data.tanggalLahir)
-            formData.append('kota_asal', data.kotaAsal)
-            if (data.fileFoto) {
-                formData.append('foto', data.fileFoto)
-
-            }
-
-            const createUserResponse = await axiosInstance.post('manajemen-user/tambah', formData)
-
-            return createUserResponse
-        },
         onError: (err) => {
             setIsLoading(false)
             setErrors(err?.response?.data?.errors)
@@ -53,6 +38,14 @@ export default function TambahUser() {
                 navigate('/admin/dashboard/manajemen-user')
             }, 2000)
         }
+    })
+
+
+    const { data: kotas, isLoadingKotas, refetch: refetchKotas } = useKotas({
+        onError: (err) => {
+            console.error(err)
+            setMessage(err?.response?.data?.message)
+        },
     })
 
 
@@ -83,21 +76,6 @@ export default function TambahUser() {
 
         if (!logged) {
             navigate('/');
-        }
-
-        if (logged.token) {
-            axios.get('http://localhost:8000/api/v1/manajemen-kota', {
-                headers: {
-                    Authorization: `Bearer ${logged.token}`,
-                    'Content-Type': 'multipart/form-data',
-                }
-            })
-                .then((res) => {
-                    setKotas(res.data.data)
-                })
-                .catch((err) => {
-                    console.error(err.response.data.errors)
-                })
         }
     }, [])
 
@@ -211,7 +189,7 @@ export default function TambahUser() {
                                 className="text-xs bg-slate-100 border px-3 py-2 text-black rounded-md"
                             >
                                 <option className="text-xs" value="">Pilih Kota</option>
-                                {kotas && kotas?.map((kota) => {
+                                {kotas && kotas?.data?.data.map((kota) => {
                                     return (
                                         <option className="text-xs" key={kota.id} value={kota.id}>{kota.kota}</option>
                                     )

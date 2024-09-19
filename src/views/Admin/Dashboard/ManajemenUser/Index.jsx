@@ -45,7 +45,6 @@ export default function ManajemenUser() {
         });
     };
 
-
     const handleDelete = async (id) => {
 
         try {
@@ -62,8 +61,6 @@ export default function ManajemenUser() {
             console.log(error)
         }
     }
-
-
 
     const handleConfirm = (status) => {
         setIsConfirmOpen(false);

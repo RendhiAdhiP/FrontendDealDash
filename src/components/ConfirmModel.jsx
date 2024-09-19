@@ -1,7 +1,7 @@
 import React from "react";
 
 export const ConfirmModal = ({ isOpen, onConfirm }) => {
-    if (!isOpen) return null; // Tidak menampilkan modal jika tidak diperlukan
+    if (!isOpen) return null; 
 
     return (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">

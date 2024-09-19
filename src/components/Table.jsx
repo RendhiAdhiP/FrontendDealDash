@@ -1,7 +1,17 @@
 import { Link } from "react-router-dom"
+import { useNavigate } from "react-router-dom";
+import { cn } from "../lib/utils";
 
+export const Table = ({ title, datas, row, links, emitDelete, foto, redirectTo }) => {
 
-export const Table = ({ title, datas, row, links, emitDelete }) => {
+    const navigate = useNavigate();
+    const handleEdit = (id) => {
+        if (redirectTo) {
+            navigate(`${redirectTo}${id}`)
+        }else{
+            return;
+        }
+    }
 
     return (
         <table className="w-full text-sm text-left rtl:text-right text-gray-500 ">
@@ -19,7 +29,7 @@ export const Table = ({ title, datas, row, links, emitDelete }) => {
                 {datas && datas?.map((data, index) => {
 
                     return (
-                        <tr className="odd:bg-white even:bg-gray-50" key={index}>
+                        <tr className={cn('odd:bg-white even:bg-gray-50',{'cursor-pointer': redirectTo})} key={index} onClick={() => handleEdit(data?.produk_id)}>
                             <th scope="row" className="px-6 py-4 font-medium whitespace-nowrap">
                                 {index + 1}
                             </th>
@@ -31,6 +41,12 @@ export const Table = ({ title, datas, row, links, emitDelete }) => {
                             ))
 
                             }
+
+                            {foto && (<td className="px-6 py-4">
+                                <div className="w-32 h-24">
+                                    <img src={data.foto} className="w-full h-full object-cover rounded-md" alt={`Product Image ${index}`} />
+                                </div>
+                            </td>)}
 
                             <td className="flex px-6 py-4 gap-2">
                                 {links?.detail && (
@@ -44,7 +60,7 @@ export const Table = ({ title, datas, row, links, emitDelete }) => {
                                 )
 
                                 }
-                                <button onClick={() => emitDelete(data?.id)} className="font-medium text-red-600 hover:underline">Hapus</button>
+                                {emitDelete && <button onClick={() => emitDelete(data?.produk_id)} className="font-medium text-red-600 hover:underline">Hapus</button>}
                             </td>
                         </tr>
                     )
