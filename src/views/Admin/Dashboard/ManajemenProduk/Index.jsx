@@ -20,6 +20,7 @@ export default function Index() {
     })
 
 
+
     useEffect(() => {
 
         if (!logged) {

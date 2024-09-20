@@ -18,6 +18,8 @@ export default function ManajemenKota() {
     // const [selectedId, setSelectedId] = useState(null);
     const [resolveDelete, setResolveDelete] = useState(null);
 
+    
+
     const { mutate: deleteKota } = useDeleteKota({
         onError: (err) => {
             console.error(err)
@@ -42,6 +44,9 @@ export default function ManajemenKota() {
     })
 
 
+
+
+
     const confirmDelete = () => {
         return new Promise((resolve) => {
             setIsConfirmOpen(true)
@@ -51,6 +56,7 @@ export default function ManajemenKota() {
 
 
     const handleDelete = async (id) => {
+
 
         try {
             const confirmed = await confirmDelete()
@@ -75,6 +81,7 @@ export default function ManajemenKota() {
             resolveDelete(status); 
         }
     };
+
 
 
     useEffect(() => {

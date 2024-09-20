@@ -1,10 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
 import { axiosInstance } from "../../lib/axios";
-// import isLogged from "../../lib/isLogged";
 
-
-export const useUsers = ({onError}) => {return useQuery({
+export const useUsers = ({onError, currentPage}) => {return useQuery({
     queryKey: ['users'],
-    queryFn: () => axiosInstance.get('manajemen-user/'),
+    queryFn: () => axiosInstance.get(`manajemen-user/?page=${currentPage}`),
     onError
 })}

@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, replace, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import isLogged from "../../../../lib/isLogged";
 import { Table } from "../../../../components/Table";
@@ -16,8 +16,12 @@ export default function ManajemenUser() {
     const [isConfirmOpen, setIsConfirmOpen] = useState(false);
     const [deleteIsLoading, setDeleteIsLoading] = useState(false);
     const [resolveDelete, setResolveDelete] = useState(null);
+    const [isLoadingPagination, setIsLoadingPagination] = useState(false)
 
-    const { data, isLoading, refetch: refetchUsers } = useUsers({
+    const [currentPage, setCurrentPage] = useState(1)
+
+    const { data: users, isLoading, refetch: refetchUsers } = useUsers({
+        currentPage: currentPage,
         onError: (err) => {
             console.error(err)
         }
@@ -37,6 +41,10 @@ export default function ManajemenUser() {
         }
     })
 
+    const handlePagination = (url) =>{
+        setIsLoadingPagination(true)
+        setCurrentPage(url.split('page=')[1])
+    } 
 
     const confirmDelete = () => {
         return new Promise((resolve) => {
@@ -44,6 +52,8 @@ export default function ManajemenUser() {
             setResolveDelete(() => resolve)
         });
     };
+
+    
 
     const handleDelete = async (id) => {
 
@@ -77,7 +87,12 @@ export default function ManajemenUser() {
             navigate('/');
         }
 
-    }, [])
+        refetchUsers()
+        setTimeout(() => {
+            setIsLoadingPagination(false)
+        }, 1500)
+
+    }, [currentPage])
 
     return (
         <>
@@ -87,7 +102,7 @@ export default function ManajemenUser() {
                 </div>
             )}
 
-            {isLoading || deleteIsLoading ? (
+            {isLoading || deleteIsLoading || isLoadingPagination ? (
                 <Loader />
             ) : (
                 <>
@@ -105,11 +120,19 @@ export default function ManajemenUser() {
                         </Link>
 
                         <div className="flex flex-col overflow-x-auto shadow-md sm:rounded-lg gap-4">
-                            <Table title={['No', 'Nama', 'Email', 'Kota Asal', 'Action']} row={['nama', 'email', 'asal_kota']} datas={data?.data?.data} links={{ detail: '/admin/dashboard/manajemen-user/user/', edit: '/admin/dashboard/manajemen-user/user-edit/' }} emitDelete={handleDelete} />
+                            <Table title={['No', 'Nama', 'Email', 'Kota Asal', 'Action']} 
+                            row={['nama', 'email', 'asal_kota']} 
+                            datas={users?.data?.data?.data} 
+                            links={{ detail: '/admin/dashboard/manajemen-user/user/', edit: '/admin/dashboard/manajemen-user/user-edit/' }} 
+                            emitDelete={handleDelete} 
+                            pagination={users?.data.data}
+                            handlePagination={handlePagination}
+                            />
                         </div>
                     </section>
                 </>
             )}
+
 
             <ConfirmModal
                 isOpen={isConfirmOpen}
