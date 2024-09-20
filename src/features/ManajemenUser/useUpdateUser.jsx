@@ -21,6 +21,11 @@ export const useUpdateUser = ({id, onError, onSuccess}) => {return useMutation({
         } else {
             formData.append('kota_asal', data.kotaAsal)
         }
+        if (data.role.id) {
+            formData.append('role_id', data.role.id)
+        } else {
+            formData.append('role_id', data.role)
+        }
 
         const updateUserResponse = axiosInstance.post(`manajemen-user/update/${id}`, formData)
 

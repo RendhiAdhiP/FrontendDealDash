@@ -3,7 +3,7 @@ import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import isLogged from "../../../../lib/isLogged";
 import { useFormik } from "formik";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { axiosInstance } from "../../../../lib/axios";
 import LoadingButton from "../../../../components/LoadingButton";
 import Button from "../../../../components/Button";
@@ -40,6 +40,17 @@ export default function TambahUser() {
         }
     })
 
+    
+    const { data: roles, isLoading: isLoadingRoles, refetch: refetchUsers } = useQuery({
+        queryFn: () => {
+            const res = axiosInstance.get('role/')
+            return res
+        },
+        onError: (err) => {
+            console.error(err)
+        }
+    })
+
 
     const { data: kotas, isLoadingKotas, refetch: refetchKotas } = useKotas({
         onError: (err) => {
@@ -56,18 +67,20 @@ export default function TambahUser() {
             password: '',
             tanggalLahir: '',
             kotaAsal: '',
-            fileFoto: null
+            fileFoto: null,
+            role: ''
         },
         onSubmit: () => {
             setIsLoading(true)
-            const { nama, email, password, tanggalLahir, kotaAsal, fileFoto } = formik.values
+            const { nama, email, password, tanggalLahir, kotaAsal, fileFoto, role } = formik.values
             createUser({
                 nama,
                 email,
                 password,
                 tanggalLahir,
                 kotaAsal,
-                fileFoto
+                fileFoto,
+                role
             })
         }
     })
@@ -199,6 +212,25 @@ export default function TambahUser() {
                                 <p className='text-xs text-red-400'>{errors?.kota_asal}</p>
                             )}
                         </div>
+                        <div className="flex flex-col gap-2">
+                                    <label htmlFor="role" className="font-medium text-base">Role</label>
+                                    <select
+                                        name="role"
+                                        value={formik.values.role.id}
+                                        onChange={formik.handleChange}
+                                        className="text-xs bg-slate-100 border px-3 py-2 text-black rounded-md"
+                                    >
+                                        <option className="text-xs" value="">Pilih Role</option>
+                                        {roles?.data.data && roles?.data.data?.filter((role) => role.id !== 1).map((role) => {
+                                            return (
+                                                <option className="text-xs" key={role.id} value={role.id}>{role.name}</option>
+                                            )
+                                        })}
+                                    </select>
+                                    {errors && (
+                                        <p className='text-xs text-red-400'>{errors.role_id}</p>
+                                    )}
+                                </div>
                     </div>
                     {isLoading ? <LoadingButton className='bg-primary text-white' classCustomLoader={'border-white'} >Kirim</LoadingButton> : <Button className='bg-primary text-white' >Kirim</Button> }
 

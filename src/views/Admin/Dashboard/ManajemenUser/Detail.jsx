@@ -27,6 +27,10 @@ export default function Detail() {
 
     })
 
+
+    console.log(data?.data.data)
+
+
     const { mutate: deleteUser, } = useDeleteUser({
         onError: (err) => {
             console.error(err)
@@ -130,6 +134,10 @@ export default function Detail() {
                                     <div className="flex-1 flex flex-col">
                                         <span className="text-lg font-medium w-max">Tanggal Lahir</span>
                                         <span className="text-sm">{data?.data?.data?.tanggal_lahir}</span>
+                                    </div>
+                                    <div className="flex-1 flex flex-col">
+                                        <span className="text-lg font-medium w-max">Role</span>
+                                        <span className="text-sm">{data?.data?.data?.role}</span>
                                     </div>
                                 </div>
                             </div>

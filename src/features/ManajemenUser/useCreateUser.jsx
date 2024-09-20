@@ -11,10 +11,12 @@ export const useCreateUser = ({ onError, onSuccess }) => {return useMutation({
         formData.append('password', data.password)
         formData.append('tanggal_lahir', data.tanggalLahir)
         formData.append('kota_asal', data.kotaAsal)
+        formData.append('role_id', data.role)
         if (data.fileFoto) {
             formData.append('foto', data.fileFoto)
 
         }
+ 
 
         const createUserResponse = await axiosInstance.post('manajemen-user/tambah', formData)
 
