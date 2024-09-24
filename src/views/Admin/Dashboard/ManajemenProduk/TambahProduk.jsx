@@ -25,6 +25,7 @@ export default function TambahProduk() {
 
             formData.append('nama_produk', data.namaProduk)
             formData.append('produk_id', data.produkId)
+            formData.append('harga', data.harga)
             if (data.fileFoto) {
                 formData.append('foto', data.fileFoto)
 
@@ -55,14 +56,16 @@ export default function TambahProduk() {
         initialValues: {
             produkId: '',
             namaProduk: '',
+            harga: '',
             fileFoto: null
         },
         onSubmit: () => {
             setIsLoading(true)
-            const { namaProduk, produkId, fileFoto } = formik.values
+            const { namaProduk, produkId, harga, fileFoto } = formik.values
             createProduk({
                 produkId,
                 namaProduk,
+                harga,
                 fileFoto
             })
         }
@@ -132,7 +135,23 @@ export default function TambahProduk() {
                         </div>
 
                     </div>
+                    <div className="flex flex-col gap-5">
+                        <div className="flex flex-col gap-2">
+                            <label htmlFor="harga" className="font-medium text-base">Harga Produk</label>
+                            <input
+                                className="text-xs bg-slate-100 border px-3 py-2 text-black rounded-md"
+                                type="number"
+                                name="harga"
+                                placeholder="Masukkan Harga Produk"
+                                value={formik.values.harga}
+                                onChange={formik.handleChange}
+                            />
+                            {errors && (
+                                <p className='text-xs text-red-400'>{errors?.harga}</p>
+                            )}
+                        </div>
 
+                    </div>
                     <div className="flex flex-col gap-2">
                         <div className="h-32 w-44 rounded-md border">
                             <img className="h-full w-full rounded-md object-cover object " src={previewFoto ? previewFoto : 'https://cdn-icons-png.flaticon.com/512/3081/3021994.png'} alt="" />

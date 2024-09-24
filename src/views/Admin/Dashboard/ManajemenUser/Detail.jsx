@@ -143,11 +143,13 @@ export default function Detail() {
                             </div>
                         </div>
 
-                        <div className="w-full flex justify-end gap-4 py-4 px-5">
-                            <Link to={`/admin/dashboard/manajemen-user/user-edit/${data?.data?.data?.id}`} className="bg-primary text-white px-5 py-1 rounded-lg" >Edit</Link>
-                            <button onClick={() => handleDelete(data?.data?.data?.id)} className="bg-red-500 text-white px-5 py-1 rounded-lg" >Hapus</button>
+                        {(isLogged().role === 'Superadmin' || isLogged().role === 'Admin Create') && (
+                            <div className="w-full flex justify-end gap-4 py-4 px-5">
+                                <Link to={`/admin/dashboard/manajemen-user/user-edit/${data?.data?.data?.id}`} className="bg-primary text-white px-5 py-1 rounded-lg" >Edit</Link>
+                                <button onClick={() => handleDelete(data?.data?.data?.id)} className="bg-red-500 text-white px-5 py-1 rounded-lg" >Hapus</button>
 
-                        </div>
+                            </div>
+                        )}
                     </section>
                 </>
             )}

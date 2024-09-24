@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom"
 import { useNavigate } from "react-router-dom";
 import { cn } from "../lib/utils";
+import isLogged from "../lib/isLogged";
 
 export const Table = ({ title, datas, row, links, emitDelete, foto, redirectTo, pagination, handlePagination }) => {
 
@@ -23,8 +24,7 @@ export const Table = ({ title, datas, row, links, emitDelete, foto, redirectTo, 
                             <th scope="col" className="px-6 py-3" key={index}>
                                 {head}
                             </th>
-                        ))
-                        }
+                        ))}
                     </tr>
                 </thead>
                 <tbody>
@@ -35,14 +35,15 @@ export const Table = ({ title, datas, row, links, emitDelete, foto, redirectTo, 
                                 <th scope="row" className="px-6 py-4 font-medium whitespace-nowrap">
                                     {index + 1}
                                 </th>
-                                {row && row?.map((row, index) => (
-
+                                {row && row?.map((rowKey, index) => (
                                     <td className="px-6 py-4" key={index}>
-                                        {data[row]}
+                                        {rowKey === 'harga' ? (
+                                            data[rowKey]?.toLocaleString('id-ID', { style: 'currency', currency: 'IDR' })
+                                        ) : (
+                                            data[rowKey]
+                                        )}
                                     </td>
-                                ))
-
-                                }
+                                ))}
 
                                 {foto && (<td className="px-6 py-4">
                                     <div className="w-32 h-24">
@@ -51,18 +52,19 @@ export const Table = ({ title, datas, row, links, emitDelete, foto, redirectTo, 
                                 </td>)}
 
                                 <td className="flex px-6 py-4 gap-2">
-                                    {links?.detail && (
+                                    {(links?.detail && (isLogged().role == 'Superadmin' || isLogged().role == 'Admin Create' || isLogged().role == 'Admin View')) && (
                                         <Link to={`${links?.detail}${data?.id}`} className="font-medium text-black-600 hover:underline">Detail</Link>
 
                                     )}
 
-                                    {links?.edit && (
-
+                                    {(links?.edit && (isLogged().role === 'Superadmin' || isLogged().role === 'Admin Create')) && (
                                         <Link to={`${links?.edit}${data?.id}`} className="font-medium text-blue-600 hover:underline">Edit</Link>
-                                    )
+                                    )}
 
-                                    }
-                                    {emitDelete && <button onClick={() => emitDelete(data?.produk_id)} className="font-medium text-red-600 hover:underline">Hapus</button>}
+                                    {(isLogged().role === 'Superadmin' || isLogged().role === 'Admin Create') && emitDelete && (
+                                        <button onClick={() => emitDelete(data?.produk_id)} className="font-medium text-red-600 hover:underline">Hapus</button>
+                                    )}
+
                                 </td>
                             </tr>
                         )
