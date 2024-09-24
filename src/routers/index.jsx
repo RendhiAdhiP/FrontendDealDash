@@ -16,6 +16,7 @@ import HistoryProduks from '../views/Admin/Dashboard/ManajemenProduk/HistoryProd
 import EditProduk from '../views/Admin/Dashboard/ManajemenProduk/EditProduk.jsx';
 import TambahStok from '../views/Admin/Dashboard/ManajemenProduk/TambahStok.jsx';
 import Role from '../views/Admin/Dashboard/Role/Index.jsx'
+import LaporanPenjualan from '../views/Admin/Dashboard/LaporanPenjualan/Index.jsx'
 
 
 const AppRoutes = () => {
@@ -41,6 +42,7 @@ const AppRoutes = () => {
                 <Route path='manajemen-produk/tambah-stok' element={<TambahStok/>} />
 
                 <Route path='role/' element={<Role/>} />
+                <Route path='laporan-penjualan/' element={<LaporanPenjualan/>} />
 
             </Route>
 

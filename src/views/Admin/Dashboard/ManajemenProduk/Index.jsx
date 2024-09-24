@@ -43,7 +43,7 @@ export default function Index() {
             ) : (
                 <>
                     <section>
-                        <h3 className="text-2xl text-balck font-medium">Manajemen Produk</h3>
+                        <h3 className="text-2xl text-balck font-medium">{(logged.role == 'Superadmin' || logged.role == 'Admin Create') ? 'Manajemen Produk' : 'Produk'}</h3>
                     </section>
 
                     <section className="flex flex-col gap-5">
@@ -58,7 +58,7 @@ export default function Index() {
                         )}
 
                         <div className="flex flex-col overflow-x-auto shadow-md sm:rounded-lg gap-4">
-                            <Table title={['No', 'Nama Produk','Stok','Harga', 'Foto',]} datas={produks?.data.data} row={['nama','stok','harga']}
+                            <Table title={['No', 'ID Produk', 'Nama Produk','Stok','Harga', 'Foto',]} datas={produks?.data.data} row={['produk_id','nama','stok','harga']}
                                 foto={produks?.data?.data}
                             // redirectTo='/admin/dashboard/manajemen-produk/edit/'
                             />

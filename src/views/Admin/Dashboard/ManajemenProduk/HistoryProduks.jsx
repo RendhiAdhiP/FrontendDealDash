@@ -60,7 +60,7 @@ export default function HistoryProduks() {
 
                         <div className="flex flex-col overflow-x-auto shadow-md sm:rounded-lg gap-4">
                             <Table
-                                title={['No', 'Nama Produk', 'Penambahan Stok', 'Stok Awal', 'Stok', 'Tanggal Penambahan Stok']}
+                                title={['No', 'Nama Produk', 'Update Stok', 'Stok Awal', 'Stok', 'Tanggal Update Stok']}
                                 datas={produks?.data.data}
                                 row={['nama_produk', 'penambahan_stok', 'stok_awal', 'stok_akhir', 'update_stok_at']}
                             />

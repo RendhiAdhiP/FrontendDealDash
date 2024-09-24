@@ -106,14 +106,14 @@ export default function Index() {
                                 <label className="text-white text-sm font-regular">Email</label>
                                 <input onChange={handleFormInput} className="text-black text-sm rounded-lg border w-full bg-white p-2 " value={formik.values.email} name='email' type="email" placeholder='exampel@example.com' />
                                 {errors && (
-                                    <p className='text-xs text-red-400'>{errors?.email}</p>
+                                    <p className='text-xs text-red-200'>{errors?.email}</p>
                                 )}
                             </div>
                             <div className="w-full flex flex-col gap-1">
                                 <label className="text-white text-sm font-regular">Password</label>
                                 <input onChange={handleFormInput} className="text-black text-sm rounded-lg border w-full bg-white p-2 " value={formik.values.password} name='password' type="password" placeholder='•••••••••••••' />
                                 {errors && (
-                                    <p className='text-xs text-red-400'>{errors?.password}</p>
+                                    <p className='text-xs text-red-200'>{errors?.password}</p>
                                 )}
                             </div>
                             {isLoading ? <LoadingButton classCustomLoader={'border-[#292424]'}>Login</LoadingButton> : <Button>Login</Button>}

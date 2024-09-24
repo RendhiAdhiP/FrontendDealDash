@@ -89,6 +89,12 @@ export default function Sidebar() {
                         </svg>
                         <Link to="/admin/dashboard/manajemen-produk/history" className={[location.pathname == '/admin/dashboard/manajemen-produk/history' ? 'font-medium text-sm text-white' : 'font-medium text-sm text-white/60']}>Stok Produk</Link>
                     </li>
+                    <li className={['relative flex gap-2 p-2 items-center cursor-pointer ', location.pathname === '/admin/dashboard/laporan-penjualan' ? 'before:block before:w-1 before:h-8 before:rounded-tr-xl before:rounded-br-xl before:bg-white before:absolute before:-left-6' : '']}>
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path className={[location.pathname === '/admin/dashboard/laporan-penjualan' ? 'fill-white text-sm font-medium' : 'fill-white/60 text-sm font-medium']} d="M12.0049 4.00275C18.08 4.00275 23.0049 6.68904 23.0049 10.0027V14.0027C23.0049 17.3165 18.08 20.0027 12.0049 20.0027C6.03824 20.0027 1.18114 17.4115 1.00957 14.1797L1.00488 14.0027V10.0027C1.00488 6.68904 5.92975 4.00275 12.0049 4.00275ZM12.0049 16.0027C8.28443 16.0027 4.99537 14.9953 3.00466 13.4532L3.00488 14.0027C3.00488 15.8849 6.88751 18.0027 12.0049 18.0027C17.0156 18.0027 20.8426 15.9723 20.9999 14.1207L21.0049 14.0027L21.0061 13.4524C19.0155 14.9949 15.726 16.0027 12.0049 16.0027ZM12.0049 6.00275C6.88751 6.00275 3.00488 8.12054 3.00488 10.0027C3.00488 11.8849 6.88751 14.0027 12.0049 14.0027C17.1223 14.0027 21.0049 11.8849 21.0049 10.0027C21.0049 8.12054 17.1223 6.00275 12.0049 6.00275Z" />
+                        </svg>
+                        <Link to="/admin/dashboard/laporan-penjualan" className={[location.pathname == '/admin/dashboard/laporan-penjualan' ? 'font-medium text-sm text-white' : 'font-medium text-sm text-white/60']}>Laporan Penjualan</Link>
+                    </li>
                     {(logged.role == 'Superadmin' || logged.role == 'Admin Create' || logged.role == 'Admin View') && (
                         <li className={['relative flex gap-2 p-2 items-center cursor-pointer ', location.pathname === '/admin/dashboard/role' ? 'before:block before:w-1 before:h-8 before:rounded-tr-xl before:rounded-br-xl before:bg-white before:absolute before:-left-6' : '']}>
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
