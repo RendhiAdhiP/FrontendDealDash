@@ -1,9 +1,3 @@
-
----
-
-### 📄 `FrontendDealDash-overview.md`
-
-```markdown
 # FrontendDealDash - Frontend Documentation
 
 Repository: [https://github.com/RendhiAdhiP/FrontendDealDash](https://github.com/RendhiAdhiP/FrontendDealDash)
@@ -66,3 +60,6 @@ npm install
 
 # 3. Jalankan server
 npm run dev
+```
+
+> ⚠️ Pastikan API berjalan di `http://localhost:8000`. Sesuaikan konfigurasi baseURL Axios jika berbeda.
