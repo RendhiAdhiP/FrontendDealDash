@@ -1,4 +1,3 @@
-// routes/index.jsx
 import { Route, Routes } from 'react-router-dom';
 import Login from '../views/Auth/Login/Index.jsx';
 import Register from '../views/Auth/Register/Index.jsx';

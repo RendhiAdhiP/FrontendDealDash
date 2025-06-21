@@ -60,11 +60,11 @@ export const Table = ({ title, datas = [], row, links, emitDelete, foto, redirec
                                         )}
 
                                         {(links?.edit && (isLogged().role === 'Superadmin' || isLogged().role === 'Admin Create')) && (
-                                            <Link to={`${links?.edit}${data?.id}`} className="font-medium text-blue-600 hover:underline">Edit</Link>
+                                            <Link to={`${links?.edit}${data?.id ?? data?.produk_id}`} className="font-medium text-blue-600 hover:underline">Edit</Link>
                                         )}
 
                                         {(isLogged().role === 'Superadmin' || isLogged().role === 'Admin Create') && emitDelete && (
-                                            <button onClick={() => emitDelete(data?.produk_id)} className="font-medium text-red-600 hover:underline">Hapus</button>
+                                            <button onClick={() => emitDelete(data?.id ?? data?.produk_id)} className="font-medium text-red-600 hover:underline">Hapus</button>
                                         )}
 
                                     </td>
