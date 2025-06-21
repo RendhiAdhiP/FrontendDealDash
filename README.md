@@ -3,12 +3,11 @@
 Repository: [https://github.com/RendhiAdhiP/FrontendDealDash](https://github.com/RendhiAdhiP/FrontendDealDash)
 
 ## 📌 Teknologi
-- React JS (Vite)
+- React JS
 - Tailwind CSS
-- ShadCN UI
 - React Router DOM
 - Axios
-- React Context / React Query
+- React Query
 
 ## 📋 Fitur Tampilan
 
