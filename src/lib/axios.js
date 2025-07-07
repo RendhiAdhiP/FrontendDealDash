@@ -3,8 +3,8 @@ import isLogged from "./isLogged";
 
 
 export const axiosInstance = axios.create({
-    // baseURL: 'http://localhost:8000/api/v1/',
-    baseURL: 'https://rendhiapi.pplgsmkn1jatiroto.com/api/v1/',
+    // baseURL: 'http://localhost:8000/api/v1',
+    baseURL: 'https://rendhiapi.pplgsmkn1jatiroto.com/api/v1',
 })
 
 
