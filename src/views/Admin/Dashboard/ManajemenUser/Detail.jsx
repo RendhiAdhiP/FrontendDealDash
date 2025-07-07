@@ -2,9 +2,9 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import isLogged from "../../../../lib/isLogged";
 import { useDeleteUser } from "../../../../features/ManajemenUser/useDeleteUser";
-import { Loader } from "../../../../components/loader";
 import { useDetailUser } from "../../../../features/ManajemenUser/useDetailUser";
 import { ConfirmModal } from "../../../../components/ConfirmModel";
+import { Loader } from "../../../../components/loader";
 
 
 
@@ -102,7 +102,7 @@ export default function Detail() {
                 </div>
             )}
 
-            {isLoading || deleteIsLoading ? (<Loader />) : (
+            {isLoading || deleteIsLoading ? (<Loader/>) : (
                 <>
                     <section className="flex items-center justify-between">
                         <Link to="/admin/dashboard/manajemen-user/" className="flex items-center gap-2 px-4 py-2 rounded-lg font-medium">
