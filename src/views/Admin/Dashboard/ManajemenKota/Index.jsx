@@ -3,9 +3,9 @@ import { useEffect, useState } from "react";
 import isLogged from "../../../../lib/isLogged";
 import { Table } from "../../../../components/Table";
 import { useKotas } from "../../../../features/ManajemenKota/useKotas";
-import { Loader } from "../../../../components/loader";
 import { useDeleteKota } from "../../../../features/ManajemenKota/useDeleteKota";
 import { ConfirmModal } from "../../../../components/ConfirmModel";
+import { Loader } from "../../../../components/loader";
 
 
 export default function ManajemenKota() {
