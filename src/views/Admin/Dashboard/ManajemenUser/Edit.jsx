@@ -6,7 +6,7 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import { useDetailUser } from "../../../../features/ManajemenUser/useDetailUser";
 import { useFormik } from "formik";
 import { useEditUser } from "../../../../features/ManajemenUser/useEditUser";
-import { Loader } from "../../../../components/loader";
+import { Loader } from "../../../../components/Loader";
 import LoadingButton from "../../../../components/LoadingButton";
 import Button from "../../../../components/Button";
 import { useUpdateUser } from "../../../../features/ManajemenUser/useUpdateUser";

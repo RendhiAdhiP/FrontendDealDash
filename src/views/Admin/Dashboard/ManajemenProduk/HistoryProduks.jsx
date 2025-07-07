@@ -2,7 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import isLogged from "../../../../lib/isLogged";
 import { Table } from "../../../../components/Table";
-import { Loader } from "../../../../components/loader";
+import { Loader } from "../../../../components/Loader";
 import { useQuery } from "@tanstack/react-query";
 import { axiosInstance } from "../../../../lib/axios";
 

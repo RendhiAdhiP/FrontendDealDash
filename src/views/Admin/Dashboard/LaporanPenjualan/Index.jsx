@@ -2,7 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import isLogged from "../../../../lib/isLogged";
 import { Table } from "../../../../components/Table";
-import { Loader } from "../../../../components/loader";
+import { Loader } from "../../../../components/Loader";
 import { useQuery } from "@tanstack/react-query";
 import { axiosInstance } from "../../../../lib/axios";
 
@@ -54,10 +54,10 @@ export default function Index() {
 
                     <section className="flex flex-col gap-5">
                         <div className="flex flex-col overflow-x-auto shadow-md sm:rounded-lg gap-4">
-                            <Table 
-                                title={['No', 'Nama Produk','Sales','Jumlah Produk Terjual', 'Nominal Penjualan', 'Tanggal Penjualan',]} 
-                                datas={laporanPenjualan?.data.data} 
-                                row={['produk','sales','jumlah_produk_terjual','nominal_penjualan','tanggal_penjualan']}
+                            <Table
+                                title={['No', 'Nama Produk', 'Sales', 'Jumlah Produk Terjual', 'Nominal Penjualan', 'Tanggal Penjualan',]}
+                                datas={laporanPenjualan?.data.data}
+                                row={['produk', 'sales', 'jumlah_produk_terjual', 'nominal_penjualan', 'tanggal_penjualan']}
                             />
                         </div>
                     </section>

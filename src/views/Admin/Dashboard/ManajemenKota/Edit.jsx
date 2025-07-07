@@ -7,7 +7,7 @@ import { useFormik } from "formik";
 import LoadingButton from "../../../../components/LoadingButton";
 import Button from "../../../../components/Button";
 import { useUpdateKota } from "../../../../features/ManajemenKota/useUpdateKota";
-import { Loader } from "../../../../components/loader";
+import { Loader } from "../../../../components/Loader";
 
 
 

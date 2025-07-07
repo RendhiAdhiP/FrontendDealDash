@@ -1,6 +1,6 @@
 import { Link, useNavigate } from "react-router-dom"
 import { Table } from "../../../../components/Table"
-import { Loader } from "../../../../components/loader";
+import { Loader } from "../../../../components/Loader";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { axiosInstance } from "../../../../lib/axios";
 import { useEffect, useState } from "react";
@@ -27,7 +27,7 @@ const Index = () => {
 
     useEffect(() => {
         if (!logged) {
-            navigate('/');  
+            navigate('/');
         }
 
     }, [])

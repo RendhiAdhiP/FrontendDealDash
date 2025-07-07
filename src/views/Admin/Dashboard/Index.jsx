@@ -3,7 +3,7 @@ import DashboardLayout from "../../../layouts/DashboardLayout";
 import { useQuery } from "@tanstack/react-query";
 import { axiosInstance } from "../../../lib/axios";
 import { useEffect } from "react";
-import { Loader } from "../../../components/loader";
+import { Loader } from "../../../components/Loader";
 
 
 export default function Index() {
@@ -36,7 +36,7 @@ export default function Index() {
     const shouldRenderLayout = !pathsWithoutLayout.some(path => location.pathname.startsWith(path));
 
 
-    const { data:dashboard, isLoading, refetch:refetchDashboard } = useQuery({
+    const { data: dashboard, isLoading, refetch: refetchDashboard } = useQuery({
         queryKey: 'dashboard',
         queryFn: () => {
             return axiosInstance.get('/')
@@ -62,7 +62,7 @@ export default function Index() {
                         <h3 className="text-2xl text-balck font-medium">Dashboard</h3>
                     </section>
                     {isLoading ? (
-                       <Loader />
+                        <Loader />
                     ) : dashboard ? (
                         <section className="grid grid-cols-4 gap-4 gap-y-8">
 

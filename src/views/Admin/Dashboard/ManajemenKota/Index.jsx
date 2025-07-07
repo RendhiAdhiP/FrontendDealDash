@@ -5,7 +5,7 @@ import { Table } from "../../../../components/Table";
 import { useKotas } from "../../../../features/ManajemenKota/useKotas";
 import { useDeleteKota } from "../../../../features/ManajemenKota/useDeleteKota";
 import { ConfirmModal } from "../../../../components/ConfirmModel";
-import { Loader } from "../../../../components/loader";
+import { Loader } from "../../../../components/Loader";
 
 
 export default function ManajemenKota() {

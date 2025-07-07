@@ -4,7 +4,7 @@ import isLogged from "../../../../lib/isLogged";
 import { useFormik } from "formik";
 import LoadingButton from "../../../../components/LoadingButton";
 import Button from "../../../../components/Button";
-import { Loader } from "../../../../components/loader";
+import { Loader } from "../../../../components/Loader";
 import { useDetailProduk } from "../../../../features/ManajemenProduk/useDetailProduk";
 import { useUpdateProduk } from "../../../../features/ManajemenProduk/useUpdateProduk";
 import { useDeleteProduk } from "../../../../features/ManajemenProduk/useDeleteProduk";

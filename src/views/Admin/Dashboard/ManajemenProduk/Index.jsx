@@ -4,7 +4,7 @@ import isLogged from "../../../../lib/isLogged";
 import { Table } from "../../../../components/Table";
 import { useProduks } from "../../../../features/ManajemenProduk/useProduks";
 import { useDeleteProduk } from "../../../../features/ManajemenProduk/useDeleteProduk";
-import { Loader } from "../../../../components/loader";
+import { Loader } from "../../../../components/Loader";
 
 export default function Index() {
 
@@ -74,9 +74,9 @@ export default function Index() {
                         <div className="flex flex-col overflow-x-auto shadow-md sm:rounded-lg gap-4">
                             <Table title={['No', 'ID Produk', 'Nama Produk', 'Stok', 'Harga', 'Foto',]} datas={produks?.data.data} row={['produk_id', 'nama', 'stok', 'harga']}
                                 foto={produks?.data?.data}
-                            // redirectTo='/admin/dashboard/manajemen-produk/edit/'
-                             links={{edit: '/admin/dashboard/manajemen-produk/edit/' }}
-                            emitDelete={deleteProduk}
+                                // redirectTo='/admin/dashboard/manajemen-produk/edit/'
+                                links={{ edit: '/admin/dashboard/manajemen-produk/edit/' }}
+                                emitDelete={deleteProduk}
                             />
                         </div>
                     </section>
