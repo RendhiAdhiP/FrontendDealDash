@@ -56,7 +56,7 @@ export default function EditKota() {
 
         queryKey: ['get.kota'],
         queryFn: () => {
-            const response = axiosInstance.get(`manajemen-kota/edit/${params.id}`)
+            const response = axiosInstance.get(`/manajemen-kota/edit/${params.id}`)
             return response
         },
         onError: (err) => {

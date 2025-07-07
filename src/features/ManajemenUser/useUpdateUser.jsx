@@ -28,7 +28,7 @@ export const useUpdateUser = ({id, onError, onSuccess}) => {return useMutation({
         }
         
 
-        const updateUserResponse = axiosInstance.post(`manajemen-user/update/${id}`, formData)
+        const updateUserResponse = axiosInstance.post(`/manajemen-user/update/${id}`, formData)
 
         return updateUserResponse
     },

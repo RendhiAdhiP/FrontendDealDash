@@ -15,7 +15,7 @@ const Index = () => {
 
     const { data: roles, isLoading, refetch: refetchUsers } = useQuery({
         queryFn: () => {
-            const res = axiosInstance.get('/role/')
+            const res = axiosInstance.get('/role')
             return res
         },
         onError: (err) => {

@@ -7,7 +7,7 @@ export const useEditUser = ({ id, onError, onSuccess }) => {
         {
             queryKey: ['editUser'],
             queryFn: async () => {
-                const response = await axiosInstance.get(`manajemen-user/edit/${id}`)
+                const response = await axiosInstance.get(`/manajemen-user/edit/${id}`)
                 return response
             },
             onError,

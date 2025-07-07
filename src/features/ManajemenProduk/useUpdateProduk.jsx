@@ -13,7 +13,7 @@ export const useUpdateProduk = ({id, onError, onSuccess}) => {return useMutation
 
         }
 
-        const response = await axiosInstance.post(`manajemen-produk/update/${id}`, formData)
+        const response = await axiosInstance.post(`/manajemen-produk/update/${id}`, formData)
 
         return response
     },

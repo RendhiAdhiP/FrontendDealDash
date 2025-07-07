@@ -44,7 +44,7 @@ export default function editUser() {
 
     const { data: roles, isLoading: isLoadingRoles, refetch: refetchUsers } = useQuery({
         queryFn: () => {
-            const res = axiosInstance.get('role/')
+            const res = axiosInstance.get('/role')
             return res
         },
         onError: (err) => {

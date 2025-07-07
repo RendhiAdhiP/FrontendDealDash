@@ -18,7 +18,7 @@ export const useCreateUser = ({ onError, onSuccess }) => {return useMutation({
         }
  
 
-        const createUserResponse = await axiosInstance.post('manajemen-user/tambah', formData)
+        const createUserResponse = await axiosInstance.post('/manajemen-user/tambah', formData)
 
         return createUserResponse
     },

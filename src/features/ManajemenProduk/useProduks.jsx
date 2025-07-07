@@ -6,7 +6,7 @@ import { axiosInstance } from "../../lib/axios"
 export const useProduks = ({ onError }) => {
     return useQuery({
         queryFn: () => {
-            return axiosInstance.get('manajemen-produk/')
+            return axiosInstance.get('/manajemen-produk/')
         },
         onError
     })

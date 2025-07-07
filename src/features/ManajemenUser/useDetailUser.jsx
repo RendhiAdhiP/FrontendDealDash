@@ -7,7 +7,7 @@ export const useDetailUser = ({ id, onError, onSuccess }) => {
         {
             queryKey: ['detailUser'],
             queryFn: async () => {
-                const response = await axiosInstance.get(`manajemen-user/detail/${id}`)
+                const response = await axiosInstance.get(`/manajemen-user/detail/${id}`)
                 return response
             },
             onError,

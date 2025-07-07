@@ -7,7 +7,7 @@ export const useTambahKota = ({ onError, onSuccess}) => {
         mutationKey: ['tambahKota'],
         mutationFn: async (data) => {
             console.log(data)
-            const response = await axiosInstance.post('manajemen-kota/tambah', {kota:data})
+            const response = await axiosInstance.post('/manajemen-kota/tambah', {kota:data})
             return response
         },
         onError,

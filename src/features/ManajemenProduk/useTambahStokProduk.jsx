@@ -10,7 +10,7 @@ export const useTambahStokProduk = ({ onError, onSuccess }) => {
             formData.append('produk_id', data.produkId)
             formData.append('stok', data.stok)
 
-            const createUserResponse = await axiosInstance.post('manajemen-produk/tambah-stok', formData)
+            const createUserResponse = await axiosInstance.post('/manajemen-produk/tambah-stok', formData)
 
             return createUserResponse
         },

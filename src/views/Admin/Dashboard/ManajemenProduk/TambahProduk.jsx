@@ -31,7 +31,7 @@ export default function TambahProduk() {
 
             }
 
-            const createUserResponse = await axiosInstance.post('manajemen-produk/tambah-produk', formData)
+            const createUserResponse = await axiosInstance.post('/manajemen-produk/tambah-produk', formData)
 
             return createUserResponse
         },

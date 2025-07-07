@@ -15,7 +15,7 @@ export default function HistoryProduks() {
 
     const { data: produks, isLoading, refetch: refetchProduks } = useQuery({
         queryFn: () => {
-            return axiosInstance.get('manajemen-produk/history')
+            return axiosInstance.get('/manajemen-produk/history')
         },
         onError: (err) => {
             console.error(err)
