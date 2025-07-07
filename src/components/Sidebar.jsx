@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { Loader } from "./loader";
 import { useLogout } from "../features/Auth/useLogout";
 import isLogged from "../lib/isLogged";
+import { Loader } from "./Loader";
 
 
 
