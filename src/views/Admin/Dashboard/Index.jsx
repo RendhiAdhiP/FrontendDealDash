@@ -2,8 +2,8 @@ import { Outlet, useLocation } from "react-router-dom";
 import DashboardLayout from "../../../layouts/DashboardLayout";
 import { useQuery } from "@tanstack/react-query";
 import { axiosInstance } from "../../../lib/axios";
-import { Loader } from "../../../components/loader";
 import { useEffect } from "react";
+import { Loader } from "../../../components/loader";
 
 
 export default function Index() {
