@@ -6,7 +6,7 @@ import isLogged from '../../../lib/isLogged'
 import  LoadingButton  from '../../../components/LoadingButton'
 import  Button  from '../../../components/Button'
 import { useFormik } from 'formik'
-import { useLogin } from '../../../features/auth/useLogin.jsx'
+import { useLogin } from '../../../features/Auth/useLogin'
 
 
 export default function Index() {
