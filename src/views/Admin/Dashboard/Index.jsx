@@ -39,7 +39,7 @@ export default function Index() {
     const { data: dashboard, isLoading, refetch: refetchDashboard } = useQuery({
         queryKey: 'dashboard',
         queryFn: () => {
-            return axiosInstance.get('/')
+            return axiosInstance.get('/dashboard')
         },
         onError: (err) => {
             console.error(err)

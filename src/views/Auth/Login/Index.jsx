@@ -46,7 +46,6 @@ export default function Index() {
         onSubmit: (values) => {
             setIsLoading(true)
             const { email, password } = formik.values
-            console.log(values)
             loginResponse({
                 email,
                 password

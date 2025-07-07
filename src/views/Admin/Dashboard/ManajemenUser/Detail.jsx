@@ -27,10 +27,6 @@ export default function Detail() {
 
     })
 
-
-    console.log(data?.data.data)
-
-
     const { mutate: deleteUser, } = useDeleteUser({
         onError: (err) => {
             console.error(err)
@@ -61,14 +57,13 @@ export default function Detail() {
             const confirmed = await confirmDelete()
 
             if (confirmed) {
-                console.log('ya')
                 setDeleteIsLoading(true)
                 deleteUser(id)
             } else {
                 return ''
             }
         } catch (error) {
-            console.log(error)
+            console.error(error)
         }
     }
 

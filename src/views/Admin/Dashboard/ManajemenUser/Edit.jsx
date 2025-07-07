@@ -52,15 +52,11 @@ export default function editUser() {
         }
     })
 
-
-    console.log(roles)
-
     const { mutate: updateUser } = useUpdateUser({
         id: params.id,
         onError: (err) => {
             setIsLoading(false)
             setErrors(err?.response?.data?.errors)
-            console.log(err.response)
         },
         onSuccess: (res) => {
             setIsLoading(false)
@@ -110,7 +106,6 @@ export default function editUser() {
                 role: user?.data.data.role,
                 fileFoto: null,
             }, false);
-            console.log(user?.data.data)
         }
     }, [user]);
 

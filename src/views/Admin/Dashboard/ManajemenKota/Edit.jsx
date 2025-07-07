@@ -66,14 +66,11 @@ export default function EditKota() {
         },
     })
 
-    console.log(kota?.data?.data?.kota)
-
     const { mutate: updateKota } = useUpdateKota({
         id: params.id,
         onError: (err) => {
             setIsLoading(false)
             setErrors(err?.response?.data?.errors)
-            console.log(err.response)
         },
         onSuccess: (res) => {
             setIsLoading(false)

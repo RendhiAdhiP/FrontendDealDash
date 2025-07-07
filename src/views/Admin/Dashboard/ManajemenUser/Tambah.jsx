@@ -27,7 +27,6 @@ export default function TambahUser() {
         onError: (err) => {
             setIsLoading(false)
             setErrors(err?.response?.data?.errors)
-            console.log(err.response)
         },
         onSuccess: (res) => {
             setIsLoading(false)

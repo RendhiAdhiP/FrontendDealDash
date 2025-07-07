@@ -23,7 +23,6 @@ export default function TambahKota() {
         onError: (err) => {
             setIsLoading(false)
             setError(err?.response?.data?.errors?.kota[0])
-            console.log(err.response)
         },
         onSuccess: (res) => {
             setIsLoading(false)

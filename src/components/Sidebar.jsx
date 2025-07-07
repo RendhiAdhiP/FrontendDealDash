@@ -17,8 +17,6 @@ export default function Sidebar() {
         onSuccess: (res) => {
             setLogoutIsLoading(false)
             setMessage(res?.data.message)
-            console.log(res)
-
             setTimeout(() => {
                 setMessage(null)
                 navigate('/')
@@ -31,11 +29,6 @@ export default function Sidebar() {
             console.error(err?.response.data.message)
         }
     })
-
-
-    useEffect(() => {
-        console.log(location.pathname)
-    }, [location.pathname])
 
     return (
         <aside className="flex flex-col h-screen w-max fixed z-10">

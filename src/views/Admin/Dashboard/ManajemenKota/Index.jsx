@@ -62,14 +62,13 @@ export default function ManajemenKota() {
             const confirmed = await confirmDelete()
 
             if (confirmed) {
-                console.log('ya')
                 setDeleteIsLoading(true)
                 deleteKota(id)
             } else {
                 return ''
             }
         } catch (error) {
-            console.log(error)
+            console.error(error)
         }
     }
 

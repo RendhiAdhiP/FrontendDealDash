@@ -22,9 +22,7 @@ const Index = () => {
             console.error(err)
         }
     })
-
-    console.log(roles)
-
+    
     useEffect(() => {
         if (!logged) {
             navigate('/');

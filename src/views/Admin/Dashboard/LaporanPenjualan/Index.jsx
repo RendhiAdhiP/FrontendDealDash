@@ -23,10 +23,6 @@ export default function Index() {
         },
     })
 
-    console.log(laporanPenjualan)
-
-
-
     useEffect(() => {
 
         if (!logged) {

@@ -31,7 +31,6 @@ export default function EditProduk() {
         onError: (err) => {
             setIsLoadingUpdateProduk(false)
             setErrors(err?.response?.data?.errors)
-            console.log(err.response)
         },
         onSuccess: (res) => {
             setIsLoadingUpdateProduk(false)
@@ -48,7 +47,6 @@ export default function EditProduk() {
         onError: (err) => {
             setIsLoadingDeleteProduk(false)
             setErrors(err?.response?.data?.errors)
-            console.log(err.response)
         },
         onSuccess: (res) => {
             setIsLoadingDeleteProduk(false)
@@ -84,15 +82,13 @@ export default function EditProduk() {
             const confirmed = await confirmDelete()
 
             if (confirmed) {
-                console.log('ya')
-                console.log(params.id)
                 setIsLoadingDeleteProduk(true)
                 deleteProduk(formik.values.produkId)
             } else {
                 return ''
             }
         } catch (error) {
-            console.log(error)
+            console.error(error)
         }
     }
 
